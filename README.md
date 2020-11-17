@@ -23,12 +23,10 @@ PAPI (Personality and Preference Inventory) Kostick Test Application in PHP lang
 + W3CSS (http://www.w3school.com/w3css)
 
 ##Donasi
-+ [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6YRM43CZ44UQ)
-+ BCA 1451332193
-+ Mandiri 1570004234408
++ BNI 0821 342 555
 
 ##Contact
 + facebook (https://m.facebook.com/cahya.dsn)
 + email (cahyadsn@gmail.com)
-+ demo site    : (http://cahyadsn.dev.php.or.id/papi)
++ demo site    : (http://psycho.cahyadsn.com/papi)
 + source code  : (https://github.com/cahyadsn/papi)
