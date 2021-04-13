@@ -17,7 +17,7 @@ PAPI (Personality and Preference Inventory) Kostick Test Application in PHP lang
 5. ubah konfigurasi database pada file 'inc/db.php' sesuai dengan yang digunakan 
 6. enjoy
 
-*note* : data dalam reo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini, silakan menghubungi developer untuk real data  seperti dalam versi demo
+*note* : data dalam repo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini, silakan menghubungi developer untuk real data  seperti dalam versi demo
 
 ## Teknologi
 + PHP (http://www.php.net/), 
