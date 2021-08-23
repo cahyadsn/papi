@@ -25,7 +25,7 @@ PAPI (Personality and Preference Inventory) Kostick Test Application in PHP lang
 + W3CSS (http://www.w3school.com/w3css)
 
 ## Donasi
-+ BNI Syariah 0821 342 555
++ Bank Syariah Indonesia (BSI) 821 342 5550
 + Paypal (https://paypal.me/cahyadwiana)
 
 ## Contact
