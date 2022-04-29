@@ -1,5 +1,7 @@
 # PAPI Kostick
-PAPI (Personality and Preference Inventory) Kostick Test Application in PHP language
+PAPI (Personality and Preference Inventory) Kostick Test Application in PHP language (Indonesian Version)
+
+Link demo : https://psycho.cahyadsn.com/papi
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/papi/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/network)
@@ -17,7 +19,7 @@ PAPI (Personality and Preference Inventory) Kostick Test Application in PHP lang
 5. ubah konfigurasi database pada file 'inc/db.php' sesuai dengan yang digunakan 
 6. enjoy
 
-*note* : data dalam repo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini, silakan menghubungi developer untuk real data  seperti dalam versi demo
+*note* : data dalam repo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini
 
 ## Teknologi
 + PHP (http://www.php.net/), 
