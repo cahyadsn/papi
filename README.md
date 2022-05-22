@@ -1,7 +1,7 @@
 # PAPI Kostick
 PAPI (Personality and Preference Inventory) Kostick Test Application in PHP language (Indonesian Version)
 
-Link demo : https://psycho.cahyadsn.com/papi (ver 0.4 Indonesian Version)
+Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) (ver 0.4 Indonesian Version)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/papi/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/network)
@@ -24,16 +24,16 @@ Link demo : https://psycho.cahyadsn.com/papi (ver 0.4 Indonesian Version)
 *note* : data dalam repo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini
 
 ## Teknologi
-+ PHP (http://www.php.net/), 
-+ MySQL (http://www.mysql.com/), 
-+ W3CSS (http://www.w3school.com/w3css)
++ PHP [http://www.php.net/](http://www.php.net/), 
++ MySQL [http://www.mysql.com/](http://www.mysql.com/), 
++ W3CSS [http://www.w3school.com/w3css](http://www.w3school.com/w3css)
 
 ## Donasi
-+ Bank Syariah Indonesia (BSI) 821 342 5550
-+ Paypal (https://paypal.me/cahyadwiana)
++ Bank Syariah Indonesia (BSI) acc.no. 821 342 5550
++ Paypal [https://paypal.me/cahyadwiana](https://paypal.me/cahyadwiana)
 
 ## Contact
-+ facebook (https://m.facebook.com/cahya.dsn)
-+ email (cahyadsn@gmail.com)
-+ demo site    : (https://psycho.cahyadsn.com/papi)
-+ source code  : (https://github.com/cahyadsn/papi)
++ facebook : [https://m.facebook.com/cahya.dsn](https://m.facebook.com/cahya.dsn)
++ email [cahyadsn@gmail.com](mailto:cahyadsn@gmail.com)
++ demo site    : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
++ source code  : [https://github.com/cahyadsn/papi](https://github.com/cahyadsn/papi)
