@@ -29,9 +29,12 @@ Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
 + W3CSS [http://www.w3school.com/w3css](http://www.w3school.com/w3css)
 
 ## Donasi
-+ Bank Syariah Indonesia (BSI) acc.no. 821 342 5550
-+ Paypal [https://paypal.me/cahyadwiana](https://paypal.me/cahyadwiana)
-
+- untuk donasi via transfer 
+    - Bank Syariah Indonesia (BSI) 821-342-5550
+    - Bank Sinarmas (153) 005 462 4719
+    - Bank BCA Digital (Blu) (501) 000 576 776 186
+- untuk donasi via PayPal [https://paypal.me/cahyadwiana]
+  
 ## Contact
 + facebook : [https://m.facebook.com/cahya.dsn](https://m.facebook.com/cahya.dsn)
 + email [cahyadsn@gmail.com](mailto:cahyadsn@gmail.com)
