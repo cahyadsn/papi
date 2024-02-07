@@ -3,6 +3,8 @@ PAPI (Personality and Preference Inventory) Kostick Test Application in PHP lang
 
 Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) (ver 0.4 Indonesian Version)
 
+:warning: APLIKASI INI TIDAK DIGUNAKAN SEBAGAI ACUAN PSIKOMETRI ATAU TUJUAN KOMERSIAL :warning:
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/papi/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/network)
 [![GitHub stars](https://img.shields.io/github/stars/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/stargazers)
