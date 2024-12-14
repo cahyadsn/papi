@@ -30,6 +30,9 @@ Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
 + MySQL [http://www.mysql.com/](http://www.mysql.com/), 
 + W3CSS [http://www.w3school.com/w3css](http://www.w3school.com/w3css)
 
+## TO DO
+- Enhancement UI/UX
+
 ## Donasi
 - untuk donasi via transfer 
     - Bank Syariah Indonesia (BSI) 821-342-5550
