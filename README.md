@@ -35,9 +35,9 @@ Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
 
 ## Donasi
 - untuk donasi via transfer 
-    - Bank Syariah Indonesia (BSI) 821-342-5550
-    - Bank Sinarmas (153) 005 462 4719
     - Bank BCA Digital (Blu) (501) 000 576 776 186
+    - Bank Sinarmas (153) 005 462 4719
+    - Bank Syariah Indonesia (BSI) 821-342-5550
 - untuk donasi via PayPal [https://paypal.me/cahyadwiana]
   
 ## Contact
