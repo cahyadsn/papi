@@ -36,12 +36,16 @@ Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
 ## TO DO
 - Enhancement UI/UX
 
-## Donasi
-- untuk donasi via transfer 
-    - Bank Syariah Indonesia (BSI) 821-342-5550
-    - Bank Sinarmas (153) 005 462 4719
+## Donation
+- untuk donasi via transfer
+    - Bank Jago (542) 5003 5796 1022
     - Bank BCA Digital (Blu) (501) 000 576 776 186
+    - Bank Sinarmas (153) 005 462 4719
+    - Bank Syariah Indonesia (BSI) 821-342-5550
 - untuk donasi via PayPal [https://paypal.me/cahyadwiana]
+- untuk donasi via QRIS CAHYADSN ID1022183125288 :
+
+![screenshot](https://github.com/cahyadsn/wilayah/blob/master/docs/qr_code.cahyadsn.png?raw=true 'Donasi via QRIS CAHYADSN')
   
 ## Contact
 + facebook : [https://m.facebook.com/cahya.dsn](https://m.facebook.com/cahya.dsn)
