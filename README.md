@@ -30,6 +30,9 @@ Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
 + MySQL [http://www.mysql.com/](http://www.mysql.com/), 
 + W3CSS [http://www.w3school.com/w3css](http://www.w3school.com/w3css)
 
+## CHANGE LOG
+- update (bug fix) papi_process.php 25-11-26
+
 ## TO DO
 - Enhancement UI/UX
 
