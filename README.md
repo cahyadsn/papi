@@ -58,6 +58,7 @@ The test consists of **90 forced-choice question pairs**. For each pair, respond
 - Responsive design for desktop and mobile
 - XSS-safe output via `htmlspecialchars`
 - Session-based question loading (no redundant DB queries)
+- `.env`-based credential management via native PHP — no Composer required
 
 ---
 
@@ -78,12 +79,16 @@ The test consists of **90 forced-choice question pairs**. For each pair, respond
 papi/
 ├── index.php            # Main test page (intro, instructions, questions)
 ├── papi_process.php     # Result processing and interpretation page
+├── .env                 # Environment variables — credentials (DO NOT commit)
+├── .env.example         # Safe-to-commit template for .env
+├── .gitignore           # Excludes .env and other local files from git
 ├── css/
 │   └── glass.css        # Glassmorphism UI stylesheet
 ├── js/
 │   └── util.php         # Client-side JS (pagination, validation, progress bar)
 ├── inc/
-│   └── db.php           # Database connection configuration
+│   ├── db.php           # Database connection (reads from .env)
+│   └── env.php          # Native PHP .env loader — no Composer required
 ├── db/
 │   └── papi.sql         # Database schema and seed data (dummy)
 └── README.md
@@ -93,7 +98,7 @@ papi/
 
 ## Installation
 
-1. **Download** or clone this repository:
+1. **Clone** the repository:
    ```bash
    git clone https://github.com/cahyadsn/papi.git
    ```
@@ -110,13 +115,23 @@ papi/
    mysql -u root -p psycho < db/papi.sql
    ```
 
-5. **Configure the database connection** — edit `inc/db.php`:
-   ```php
-   $host = 'localhost';
-   $user = 'root';
-   $pass = '';
-   $name = 'psycho';
+5. **Set up environment variables** — copy the example file and fill in your values:
+   ```bash
+   cp .env.example .env
    ```
+   Then edit `.env`:
+   ```env
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=your_password
+   DB_NAME=psycho
+   DB_PORT=3306
+   DB_CHARSET=utf8mb4
+
+   APP_ENV=development
+   APP_DEBUG=true
+   ```
+   > ⚠️ Never commit `.env` to version control — it is already excluded by `.gitignore`.
 
 6. Open your browser and navigate to `http://localhost/papi`.
 
@@ -154,6 +169,7 @@ The application relies on four main tables:
 
 | Date | Change |
 |------|--------|
+| 2026-07-12 | Added `.env`-based credential management via native PHP loader (`inc/env.php`); credentials moved out of `inc/db.php`; added `.gitignore` and `.env.example` |
 | 2026-07-12 | UI refactored — replaced W3.CSS with custom glassmorphism CSS (`css/glass.css`); rewrote `js/util.php` as clean readable JS; added XSS protection and progress bar |
 | 2025-11-26 | Bug fix in `papi_process.php` |
 | 2021-03-06 | `index.php` updated |

@@ -1,0 +1,9 @@
+# Environment — contains secrets, never commit
+.env
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
