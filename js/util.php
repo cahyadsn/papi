@@ -1,1 +1,91 @@
-<?php header("Content-type: text/javascript");echo "var total={$_GET['total_page']},p=0;";?>eval(function(m,i,n,e,r,v,a){r=function(n){return(n<i?'':r(parseInt(n/i)))+((n=n%i)>35?String.fromCharCode(n+29):n.toString(36))};if(!''.replace(/^/,String)){while(n--)v[r(n)]=e[n]||r(n);e=[function(r){return v[r]}];r=function(){return'\\w+'};n=1};while(n--)if(e[n])m=m.replace(new RegExp('\\b'+r(n)+'\\b','g'),e[n]);return m}('f J(){5 a=\'\';9(5 i=1;i<=G;i++){e(!2.4(\'l\'+i+\'A\').k&&!2.4(\'l\'+i+\'r\').k){e(a==\'\')a="o B : ";a+=i+", "}}e(a){2.4(\'z\').K=a+"w s";2.4(\'v\').7.6="8";h d}q h c}f j(a){9(5 i=1;i<=3;i++)2.4(\'u\'+i).7.6=(a==i)?\'8\':\'b\'}f g(x){p+=x;5 y=2.C(\'D-E-F\');9(5 i=0;i<y.H;i++)y[i].7.6=i==p?\'8\':\'b\';2.4(\'t\'+p).7.6=\'8\';2.4(\'I\').m=(p>0?d:c);2.4(\'j\').m=(p<n-1?d:c);2.4(\'L\').7.6=(p<n-1?\'b\':\'M\')}g(0);',49,49,'||document||getElementById|var|display|style|block|for||none|true|false|if|function|trans|return||next|checked|s_|disabled|total|Pertanyaan||else|_1|diisi||page|alert|belum|||msg|_0|no|getElementsByClassName|w3|table|all|90|length|prev|check|innerHTML|submit|inline'.split('|'),0,{}))
+<?php
+header("Content-type: text/javascript");
+$total_page = intval($_GET['total_page'] ?? 0);
+echo "var total = {$total_page};\n";
+?>
+
+// Current page index (0-based)
+var p = 0;
+
+/**
+ * Validate that every question pair on all pages has been answered.
+ * Shows the alert and returns false if any question is unanswered.
+ */
+function check() {
+    var unanswered = [];
+    for (var i = 1; i <= 90; i++) {
+        var a = document.getElementById('s_' + i + '_0');
+        var b = document.getElementById('s_' + i + '_1');
+        if (a && b && !a.checked && !b.checked) {
+            unanswered.push(i);
+        }
+    }
+    if (unanswered.length > 0) {
+        showAlert('Pertanyaan belum diisi: ' + unanswered.join(', '));
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Navigate to a page by index (called from intro/instruction pages).
+ */
+function next(pageNum) {
+    for (var i = 1; i <= 3; i++) {
+        var el = document.getElementById('page' + i);
+        if (el) el.style.display = (i === pageNum) ? 'block' : 'none';
+    }
+}
+
+/**
+ * Transition between question table segments.
+ * @param {number} dir  +1 (forward) or -1 (backward)
+ */
+function trans(dir) {
+    p += dir;
+
+    var tables = document.getElementsByClassName('q-table');
+    for (var i = 0; i < tables.length; i++) {
+        tables[i].style.display = (i === p) ? 'block' : 'none';
+    }
+
+    // Scroll table into view smoothly
+    var currentTable = document.getElementById('t' + p);
+    if (currentTable) currentTable.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Update prev/next/submit button states
+    var prevBtn   = document.getElementById('prev');
+    var nextBtn   = document.getElementById('next');
+    var submitBtn = document.getElementById('submit');
+
+    if (prevBtn)   prevBtn.disabled   = (p <= 0);
+    if (nextBtn)   nextBtn.style.display   = (p < total - 1) ? 'inline-flex' : 'none';
+    if (submitBtn) submitBtn.style.display = (p < total - 1) ? 'none' : 'inline-flex';
+
+    // Update progress bar
+    updateProgress();
+}
+
+/**
+ * Update the progress bar and label.
+ */
+function updateProgress() {
+    var label = document.getElementById('progress-label');
+    var fill  = document.getElementById('progress-fill');
+    if (label) label.textContent = 'Bagian ' + (p + 1) + ' / ' + total;
+    if (fill)  fill.style.width  = Math.round(((p + 1) / total) * 100) + '%';
+}
+
+/**
+ * Show the alert banner with a message.
+ */
+function showAlert(msg) {
+    // Try the form-scoped alert first, fall back to the page-level one
+    var msgEl   = document.getElementById('msg-form') || document.getElementById('msg');
+    var wrapEl  = document.getElementById('alert-form-wrap') || document.getElementById('alert-wrap');
+    if (msgEl)  msgEl.textContent = msg;
+    if (wrapEl) wrapEl.style.display = 'block';
+}
+
+// Initialise on load
+trans(0);

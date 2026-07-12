@@ -6,23 +6,176 @@
 FILENAME     : index.php
 AUTHOR       : CAHYA DSN
 CREATED DATE : 2017-04-09
-UPDATED DATE : 2021-03-06
+UPDATED DATE : 2026-07-12
 DEMO SITE    : http://psycho.cahyadsn.com/papi
 SOURCE CODE  : https://github.com/cahyadsn/papi
 ================================================================================
-This program is free software; you can redistribute it and/or modify it under the
-terms of the MIT License.
+*/
+session_start();
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+$view_num   = 5;
+$total_page = ceil(90 / $view_num);
 
-See the MIT License for more details
+if (!isset($_SESSION['papiq'])) {
+    include 'inc/db.php';
+    $result = $db->query('SELECT * FROM papi_questions');
+    $no     = 0;
+    $data   = [];
+    foreach ($result as $r) {
+        $data[++$no] = [$r['value1'], $r['question1'], $r['value2'], $r['question2']];
+    }
+    $_SESSION['papiq'] = $data;
+    unset($data);
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="author"      content="Cahya DSN" />
+  <meta name="keywords"    content="Psikotest, PAPI Kostick, personality test, psikologi" />
+  <meta name="description" content="PAPI Kostick Test — Personality and Preference Inventory (PHP + MySQL)" />
+  <title>PAPI Kostick Test</title>
+  <link rel="stylesheet" href="css/glass.css" />
+</head>
+<body>
 
-copyright (c) 2017-2021 by cahya dsn; cahyadsn@gmail.com
-================================================================================ */
-session_start();$view_num=5;$total_page=ceil(90/$view_num);if(!isset($_SESSION['papiq'])){include 'inc/db.php';$result=$db->query('SELECT * FROM papi_questions');$no=0;$data=array();foreach($result as $r)$data[++$no]=array($r['value1'],$r['question1'],$r['value2'],$r['question2']);$_SESSION['papiq']=$data;unset($data);} ?><!DOCTYPE html><html><head><title>Prototype PAPIKostick Test</title><link rel="stylesheet" href="css/w3.css"><style>.first{padding-left:16px !important;}.notb-margin{margin-top:0px !important;margin-bottom:0px !important;display:none}</style></head><body><div class="w3-container w3-padding-16"><div class="w3-card-4"><header class="w3-container w3-blue"><h1>PAPI KOSTICK</h1></header><div class="w3-panel w3-red w3-display-container notb-margin" id="alert"><span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span><h3>Warning!</h3><p id='msg'></p></div><div id="dynamic_content"><div class="w3-container" id="page1"><p>PAPI (<i>Personality and Preference Inventory</i>) adalah <i>personality assessment</i> atau alat tes penilaian kepribadian terkemuka yang digunakan oleh para profesional HR (<i>Human Resource</i>) dan manajer terkait untuk mengevaluasi perilaku dan gaya kerja individu pada semua tingkatan. <i>Personality and Preference Inventory</i> (PAPI) dibuat oleh Guru Besar Psikologi Industri dari Massachusetts, Amerika, yang bernama Dr. Max Martin Kostick pada awal tahun 1960-an. Versi Swedia lebih dulu diperkenalkan di awal 1980-an dan versi ini diperkenalkan pada tahun 1997 dengan versi <i>ipsatif</i> (PAPI-I) dan <i>normatif</i> (PAPI-N). Versi <i>ipsatif</i>, PAPI-I, dirancang untuk digunakan untuk pengembangan pribadi, sedangkan versi <i>normatif</i>, PAPI-N, yang dimaksudkan untuk digunakan untuk perbandingan dan seleksi. Dasar pemikiran untuk desain dan formulasi PAPI didasarkan pada penelitian dan teori kepribadian “<i>needs-press</i>” oleh Murray (1938)</p><p style="text-align:center"><a href="#" class="w3-button w3-round-xlarge w3-blue" onclick="next(2);">Next</a></p></div><div class="w-container" id="page2" style="display:none;"><h3>Petunjuk Pengisian</h3><p><ul><li>Tes ini terdiri dari 90 pasang pernyataan yang berhubungan dengan situasi kerja Saudara.</li><li>Dari sepasang pernyataan tersebut, Saudara diminta untuk memilih salah satu pernyataan yang paling menggambarkan diri Saudara atau pernyataan mana yang dirasa paling penting bagi Saudara</li><li>Jika kedua pernyataan tersebut sangat sesuai dengan diri Saudara, maka Saudara tetap harus memilih salah satu diantaranya yang dirasa paling sesuai dengan diri Saudara</li><li>Hal sebaliknya pun berlaku. Jika kedua pernyataan tersebut sangat tidak sesuai dengan diri Saudara, maka Saudara tetap harus memilih salah satu pernyataan yang paling menggambarkan kondisi diri Saudara yang sebenarnya.</li><li>Sudara harus menjawabnya dengan jujur dan jangan pernah berpikir untuk memberikan jawaban yang benar, karena jawaban terbaik adalah jawaban yang paling mendekati diri Saudara.</li><li>Setiap nomor hanya terdiri dari satu jawaban dan tes ini membutuhkan jawaban yang segera (tanpa mempertimbangkan pernyataan yang ada terlalu lama), jadi kerjakanlah secepat-cepatnya namun tetap teliti. Jangan ada yang double atau kosong pada setiap nomor</li><li>Klik tombol [mulai] berikut ini jika Saudara telah siap melakukan test</li></ul></p><p style="text-align:center"><a href="#" class="w3-button w3-round-xlarge w3-blue" onclick="next(3);">Mulai</a></p></div><div class="w-container" id="page3" style="display:none;"><form method="post" action="papi_process.php" id='frm' onsubmit="return check();"><div class="w3-panel w3-red w3-display-container notb-margin" id="alert"><span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span><h3>Warning!</h3>><p id='msg'></p></div><?php $x=0;foreach($_SESSION['papiq'] as $no=>$data){if(($no-1)%$view_num==0 || $no==1){echo ($no>1?"</table>":"")."<table  class='w3-table-all' id='t".($x++)."'  style='width:100%;".($no!=1?"display:none;'":"'")."><tr class='w3-theme-d1'><th>No</th><th colspan='2'>Pernyataan</th></tr>";}echo "<tr><td rowspan='2'>[{$no}]</td><td class='first'><input type='radio' id='s_{$no}_0' name='s[{$no}]' value='{$data[0]}'></td><td>{$data[1]}</td></tr><tr><td><input type='radio' id='s_{$no}_1' name='s[{$no}]' value='{$data[2]}'></td><td>{$data[3]}</td></tr>";}echo "</table>";?><div class='w3-yellow' style="padding:5px;"><p><input type="button" onclick="trans(-1);" id='prev' class="w3-button w3-round-xlarge w3-blue" disabled="disabled" value="prev"><input type="button" onclick="trans(1);" id='next' class="w3-button w3-round-xlarge w3-blue" value="next"><input type="submit" id='submit' class="w3-button w3-round-xlarge w3-green" style='display:none' value="submit"><br></p></div></form></div></div><footer class="w3-container w3-indigo" style="text-align:center;"><h5>copyright &copy; <?php echo date('Y');?> by <a href="mailto:cahyadsn@gmail.com">cahyadsn</a></h5></footer></div></div><script src="js/util.php?total_page=<?php echo $total_page;?>"></script></body></head>
+<div class="glass-page">
+  <div class="glass-card">
+
+    <!-- Header -->
+    <header class="glass-header">
+      <span class="header-icon">🧠</span>
+      <h1>PAPI KOSTICK</h1>
+    </header>
+
+    <!-- Global alert (hidden by default) -->
+    <div class="glass-body" id="alert-wrap" style="padding-bottom:0;display:none;">
+      <div class="glass-alert visible" id="alert">
+        <div>
+          <strong>⚠ Peringatan!</strong>
+          <span id="msg"></span>
+        </div>
+        <button class="alert-close" onclick="document.getElementById('alert-wrap').style.display='none';">&times;</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Content -->
+    <div id="dynamic_content">
+
+      <!-- PAGE 1 — Introduction -->
+      <div class="glass-body" id="page1">
+        <h2>Tentang PAPI Kostick</h2>
+        <p>
+          <b>PAPI (<i>Personality and Preference Inventory</i>)</b> adalah <i>personality assessment</i>
+          atau alat tes penilaian kepribadian terkemuka yang digunakan oleh para profesional HR
+          (<i>Human Resource</i>) dan manajer terkait untuk mengevaluasi perilaku dan gaya kerja
+          individu pada semua tingkatan.
+        </p>
+        <p>
+          PAPI dibuat oleh Guru Besar Psikologi Industri dari Massachusetts, Amerika, yang bernama
+          <b>Dr. Max Martin Kostick</b> pada awal tahun 1960-an. Versi ini diperkenalkan pada tahun
+          1997 dengan versi <i>ipsatif</i> (PAPI-I) dan <i>normatif</i> (PAPI-N). Dasar pemikiran
+          desain PAPI didasarkan pada teori kepribadian "<i>needs-press</i>" oleh Murray (1938).
+        </p>
+        <div class="btn-row center">
+          <a href="#" class="btn btn-primary" onclick="next(2); return false;">Lanjut &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PAGE 2 — Instructions -->
+      <div class="glass-body" id="page2" style="display:none;">
+        <h2>Petunjuk Pengisian</h2>
+        <ul>
+          <li>Tes ini terdiri dari <b>90 pasang pernyataan</b> yang berhubungan dengan situasi kerja Saudara.</li>
+          <li>Dari setiap pasang pernyataan, pilih <b>satu</b> yang paling menggambarkan diri Saudara.</li>
+          <li>Jika keduanya sangat sesuai, tetap pilih yang <em>paling</em> sesuai.</li>
+          <li>Jika keduanya tidak sesuai, tetap pilih yang <em>paling mendekati</em> kondisi diri Saudara.</li>
+          <li>Jawab dengan <b>jujur</b> — tidak ada jawaban benar atau salah.</li>
+          <li>Kerjakan <b>secepat-cepatnya</b> namun tetap teliti. Jangan ada yang kosong atau dobel.</li>
+        </ul>
+        <div class="btn-row center">
+          <a href="#" class="btn btn-primary" onclick="next(3); return false;">Mulai Tes &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PAGE 3 — Questions Form -->
+      <div class="glass-body" id="page3" style="display:none;">
+        <form method="post" action="papi_process.php" id="frm" onsubmit="return check();">
+
+          <!-- Alert inside form (same element, re-used by JS) -->
+          <div id="alert-form-wrap" style="display:none; margin-bottom:16px;">
+            <div class="glass-alert visible" id="alert-form">
+              <div>
+                <strong>⚠ Peringatan!</strong>
+                <span id="msg-form"></span>
+              </div>
+              <button type="button" class="alert-close"
+                onclick="document.getElementById('alert-form-wrap').style.display='none';">&times;</button>
+            </div>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="progress-wrap">
+            <div class="progress-label" id="progress-label">Bagian 1 / <?php echo $total_page; ?></div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-fill" style="width:<?php echo round(100/$total_page); ?>%;"></div>
+            </div>
+          </div>
+
+          <?php
+          $x = 0;
+          foreach ($_SESSION['papiq'] as $no => $data) {
+              if (($no - 1) % $view_num === 0 || $no === 1) {
+                  if ($no > 1) echo '</tbody></table>';
+                  $hidden = ($no !== 1) ? ' style="display:none;"' : '';
+                  echo "<table class='q-table' id='t{$x}'{$hidden}>";
+                  echo "<thead><tr><th>No</th><th colspan='2'>Pernyataan</th></tr></thead><tbody>";
+                  $x++;
+              }
+              echo "
+              <tr class='q-sep'>
+                <td class='q-num' rowspan='2'>[{$no}]</td>
+                <td class='q-radio'><input type='radio' id='s_{$no}_0' name='s[{$no}]' value='{$data[0]}'></td>
+                <td>{$data[1]}</td>
+              </tr>
+              <tr>
+                <td class='q-radio'><input type='radio' id='s_{$no}_1' name='s[{$no}]' value='{$data[2]}'></td>
+                <td>{$data[3]}</td>
+              </tr>";
+          }
+          echo '</tbody></table>';
+          ?>
+
+          <!-- Navigation buttons -->
+          <div class="btn-row" style="padding-top:20px; border-top: 1px solid rgba(255,255,255,0.08); margin-top:16px;">
+            <button type="button" onclick="trans(-1);" id="prev" class="btn btn-primary" disabled>
+              &larr; Prev
+            </button>
+            <button type="button" onclick="trans(1);"  id="next" class="btn btn-primary">
+              Next &rarr;
+            </button>
+            <button type="submit" id="submit" class="btn btn-success hidden">
+              ✔ Submit
+            </button>
+          </div>
+
+        </form>
+      </div><!-- /page3 -->
+
+    </div><!-- /dynamic_content -->
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+      copyright &copy; <?php echo date('Y'); ?> by
+      <a href="mailto:cahyadsn@gmail.com">cahyadsn</a>
+    </footer>
+
+  </div><!-- /glass-card -->
+</div><!-- /glass-page -->
+
+<script src="js/util.php?total_page=<?php echo $total_page; ?>"></script>
+</body>
+</html>

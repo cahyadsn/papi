@@ -1,54 +1,206 @@
 # PAPI Kostick
-PAPI (Personality and Preference Inventory) Kostick Test Application in PHP language (Indonesian Version)
 
-Link demo : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) (ver 0.4 Indonesian Version)
+**Personality and Preference Inventory (PAPI) Kostick** — a web-based psychological assessment application built with PHP and MySQL.
 
-:warning: APLIKASI INI TIDAK DIGUNAKAN SEBAGAI ACUAN PSIKOMETRI ATAU TUJUAN KOMERSIAL :warning:
+Live demo: [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) *(v0.4 — Indonesian)*
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/papi/master/LICENSE)
-[![GitHub forks](https://img.shields.io/github/forks/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/network)
-[![GitHub stars](https://img.shields.io/github/stars/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat)]()
-[![Donate](https://img.shields.io/badge/$-support-ff69b4.svg?style=flat)](https://paypal.me/cahyadwiana)  
+> ⚠️ **Disclaimer:** This application is intended for educational and personal development purposes only. It must **not** be used as a formal psychometric reference or for any commercial purpose.
 
-# Pendahuluan
-**PAPI (*Personality and Preference Inventory*)** adalah *personality assessment* atau alat tes penilaian kepribadian terkemuka yang digunakan oleh para profesional HR (Human Resource) dan manajer terkait untuk mengevaluasi perilaku dan gaya kerja individu pada semua tingkatan. Personality and Preference Inventory (PAPI) dibuat oleh Guru Besar Psikologi Industri dari Massachusetts, Amerika, yang bernama Dr. Max Martin Kostick pada awal tahun 1960-an. Versi Swedia lebih dulu diperkenalkan di awal 1980-an dan versi ini diperkenalkan pada tahun 1997 dengan versi ipsatif (PAPI-I) dan normatif (PAPI-N). Versi ipsatif, PAPI-I, dirancang untuk digunakan untuk pengembangan pribadi, sedangkan versi normatif, PAPI-N, yang dimaksudkan untuk digunakan untuk perbandingan dan seleksi. Dasar pemikiran untuk desain dan formulasi PAPI didasarkan pada penelitian dan teori kepribadian “*needs-press*” oleh Murray (1938)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/cahyadsn/papi/master/LICENSE)
+[![Forks](https://img.shields.io/github/forks/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/network)
+[![Stars](https://img.shields.io/github/stars/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/stargazers)
+[![Issues](https://img.shields.io/github/issues/cahyadsn/papi.svg)](https://github.com/cahyadsn/papi/issues)
+[![Donate](https://img.shields.io/badge/$-support-ff69b4.svg?style=flat)](https://paypal.me/cahyadwiana)
 
-## Instalasi
-1. download file papi_master.zip 
-2. extract ke folder root document webserver
-3. buat database baru dengan nama 'psycho'
-4. import 'db/papi.sql' ke dalam database 'psycho' tersebut
-5. ubah konfigurasi database pada file 'inc/db.php' sesuai dengan yang digunakan 
-6. enjoy
+---
 
-*note* : data dalam repo ini adalah berupa dummy data, real data tidak termasuk dalam repo ini
+## Table of Contents
 
-## Teknologi
-+ PHP [http://www.php.net/](http://www.php.net/), 
-+ MySQL [http://www.mysql.com/](http://www.mysql.com/), 
-+ W3CSS [http://www.w3school.com/w3css](http://www.w3school.com/w3css)
+- [About PAPI Kostick](#about-papi-kostick)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Database Schema](#database-schema)
+- [Changelog](#changelog)
+- [Roadmap](#roadmap)
+- [Donation](#donation)
+- [Contact](#contact)
 
-## CHANGE LOG
-- update (bug fix) papi_process.php 25-11-26
+---
 
-## TO DO
-- Enhancement UI/UX
+## About PAPI Kostick
+
+**PAPI (Personality and Preference Inventory)** is a leading personality assessment tool used by HR professionals and managers to evaluate individual behavior and work styles at all organizational levels.
+
+PAPI was developed by **Dr. Max Martin Kostick**, Professor of Industrial Psychology at Massachusetts, USA, in the early 1960s. The Swedish version was introduced in the early 1980s, followed by the 1997 release with two variants:
+
+| Variant | Code | Purpose |
+|---------|------|---------|
+| Ipsative | PAPI-I | Personal development |
+| Normative | PAPI-N | Comparison and selection |
+
+The theoretical foundation of PAPI is based on Murray's (1938) **"needs-press"** personality theory, which examines the interaction between a person's internal needs and external environmental pressures.
+
+The test consists of **90 forced-choice question pairs**. For each pair, respondents choose the statement that best describes themselves, even if both seem equally applicable or inapplicable.
+
+---
+
+## Features
+
+- 90-question PAPI Kostick assessment (ipsative format)
+- Paginated question view (5 questions per page)
+- Client-side validation — prevents unanswered questions before submission
+- Automated result interpretation from database rules
+- Results grouped by personality aspect and role
+- Modern **glassmorphism UI** — no external CSS framework dependency
+- Responsive design for desktop and mobile
+- XSS-safe output via `htmlspecialchars`
+- Session-based question loading (no redundant DB queries)
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | PHP 7.4+ |
+| Database | MySQL 5.7+ / MariaDB |
+| Frontend | Vanilla HTML, CSS (glassmorphism), Vanilla JS |
+| Styling | Custom `css/glass.css` (replaces W3.CSS) |
+
+---
+
+## Project Structure
+
+```
+papi/
+├── index.php            # Main test page (intro, instructions, questions)
+├── papi_process.php     # Result processing and interpretation page
+├── css/
+│   └── glass.css        # Glassmorphism UI stylesheet
+├── js/
+│   └── util.php         # Client-side JS (pagination, validation, progress bar)
+├── inc/
+│   └── db.php           # Database connection configuration
+├── db/
+│   └── papi.sql         # Database schema and seed data (dummy)
+└── README.md
+```
+
+---
+
+## Installation
+
+1. **Download** or clone this repository:
+   ```bash
+   git clone https://github.com/cahyadsn/papi.git
+   ```
+
+2. **Copy** the project folder to your web server's document root (e.g., `htdocs/` for XAMPP or `www/` for Laragon).
+
+3. **Create the database:**
+   ```sql
+   CREATE DATABASE psycho CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+
+4. **Import the schema:**
+   ```bash
+   mysql -u root -p psycho < db/papi.sql
+   ```
+
+5. **Configure the database connection** — edit `inc/db.php`:
+   ```php
+   $host = 'localhost';
+   $user = 'root';
+   $pass = '';
+   $name = 'psycho';
+   ```
+
+6. Open your browser and navigate to `http://localhost/papi`.
+
+> **Note:** The repository contains **dummy data** only. Real psychometric data is not included.
+
+---
+
+## Usage
+
+1. The home page presents a brief introduction to PAPI Kostick.
+2. Click **Lanjut** to read the instructions.
+3. Click **Mulai Tes** to begin the 90-question assessment.
+4. Navigate between pages using **Prev** and **Next** buttons.
+5. The progress bar tracks which section you are on.
+6. Once all questions are answered, click **Submit** to see your results.
+7. The results page displays each personality aspect with its role and interpretation.
+8. Click **Ulangi Tes** to retake the test.
+
+---
+
+## Database Schema
+
+The application relies on four main tables:
+
+| Table | Description |
+|-------|-------------|
+| `papi_questions` | The 90 question pairs (`value1`, `question1`, `value2`, `question2`) |
+| `papi_aspects` | Personality aspect categories |
+| `papi_roles` | Roles within each aspect |
+| `papi_rules` | Scoring rules: maps score ranges (`low_value`–`high_value`) to interpretations |
+
+---
+
+## Changelog
+
+| Date | Change |
+|------|--------|
+| 2026-07-12 | UI refactored — replaced W3.CSS with custom glassmorphism CSS (`css/glass.css`); rewrote `js/util.php` as clean readable JS; added XSS protection and progress bar |
+| 2025-11-26 | Bug fix in `papi_process.php` |
+| 2021-03-06 | `index.php` updated |
+| 2017-04-09 | Initial release |
+
+---
+
+## Roadmap
+
+- [ ] Add English language support
+- [ ] PAPI-N (normative) variant
+- [ ] Printable / exportable PDF result report
+- [ ] User authentication and result history
+- [ ] Admin panel for managing questions and scoring rules
+- [ ] Chart/radar visualization of personality aspects
+
+---
 
 ## Donation
-- untuk donasi via transfer
-    - Bank Jago (542) 5003 5796 1022
-    - Bank BCA Digital (Blu) (501) 000 576 776 186
-    - Bank Sinarmas (153) 005 462 4719
-    - Bank Syariah Indonesia (BSI) 821-342-5550
-- untuk donasi via PayPal [https://paypal.me/cahyadwiana]
-- untuk donasi via QRIS CAHYADSN ID1022183125288 :
 
-![screenshot](https://github.com/cahyadsn/wilayah/blob/master/docs/qr_code.cahyadsn.png?raw=true 'Donasi via QRIS CAHYADSN')
-  
+If you find this project useful, consider supporting the author:
+
+**Bank Transfer (Indonesia)**
+| Bank | Account Number |
+|------|---------------|
+| Bank Jago (542) | 5003 5796 1022 |
+| Bank BCA Digital / Blu (501) | 000 576 776 186 |
+| Bank Sinarmas (153) | 005 462 4719 |
+| Bank Syariah Indonesia / BSI | 821-342-5550 |
+
+**PayPal:** [https://paypal.me/cahyadwiana](https://paypal.me/cahyadwiana)
+
+**QRIS:** CAHYADSN ID1022183125288
+
+![QRIS](https://github.com/cahyadsn/wilayah/blob/master/docs/qr_code.cahyadsn.png?raw=true 'Donate via QRIS CAHYADSN')
+
+---
+
 ## Contact
-+ facebook : [https://m.facebook.com/cahya.dsn](https://m.facebook.com/cahya.dsn)
-+ email [cahyadsn@gmail.com](mailto:cahyadsn@gmail.com)
-+ demo site    : [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi)
-+ source code  : [https://github.com/cahyadsn/papi](https://github.com/cahyadsn/papi)
+
+| Channel | Link |
+|---------|------|
+| Email | [cahyadsn@gmail.com](mailto:cahyadsn@gmail.com) |
+| Facebook | [https://m.facebook.com/cahya.dsn](https://m.facebook.com/cahya.dsn) |
+| Demo site | [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) |
+| Source code | [https://github.com/cahyadsn/papi](https://github.com/cahyadsn/papi) |
+
+---
+
+*copyright © 2017–2026 by [cahyadsn](mailto:cahyadsn@gmail.com) — released under the [MIT License](LICENSE)*

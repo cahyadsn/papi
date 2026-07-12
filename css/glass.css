@@ -1,0 +1,408 @@
+/* ============================================================
+   glass.css — Glassmorphism UI for PAPI Kostick
+   Replaces w3.css dependency
+   ============================================================ */
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e8eaf6;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+}
+
+/* animated background blobs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  width: 520px; height: 520px;
+  background: #7c3aed;
+  top: -120px; left: -120px;
+}
+body::after {
+  width: 420px; height: 420px;
+  background: #0ea5e9;
+  bottom: -100px; right: -80px;
+}
+
+/* ── Layout Wrapper ───────────────────────────────────────── */
+.glass-page {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.glass-header {
+  padding: 24px 28px;
+  background: linear-gradient(90deg,
+    rgba(124, 58, 237, 0.6) 0%,
+    rgba(14, 165, 233, 0.45) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.glass-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.glass-header .header-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* ── Body / Content area ──────────────────────────────────── */
+.glass-body {
+  padding: 28px;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.glass-footer {
+  padding: 14px 28px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.glass-footer a {
+  color: rgba(167, 139, 250, 0.85);
+  text-decoration: none;
+}
+
+.glass-footer a:hover {
+  color: #a78bfa;
+}
+
+/* ── Alert Banner ─────────────────────────────────────────── */
+.glass-alert {
+  display: none;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: 12px;
+  color: #fca5a5;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.glass-alert.visible {
+  display: flex;
+}
+
+.glass-alert strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.glass-alert .alert-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none;
+  border: none;
+  color: #fca5a5;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.glass-alert .alert-close:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; color: #c4b5fd; }
+h3 { font-size: 1.1rem;  font-weight: 600; margin-bottom: 10px; color: #c4b5fd; }
+
+p  { margin-bottom: 14px; color: rgba(232, 234, 246, 0.88); }
+
+ul {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+ul li {
+  margin-bottom: 8px;
+  color: rgba(232, 234, 246, 0.85);
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  text-decoration: none;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.65);
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+}
+
+.btn-success:hover {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Button row ───────────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px 0 4px;
+}
+
+.btn-row.center {
+  justify-content: center;
+  padding: 24px 0 8px;
+}
+
+/* ── Progress bar ─────────────────────────────────────────── */
+.progress-wrap {
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  height: 5px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #0ea5e9);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* ── Question Table ───────────────────────────────────────── */
+.q-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 4px;
+}
+
+.q-table thead tr {
+  background: rgba(124, 58, 237, 0.3);
+}
+
+.q-table thead th {
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #c4b5fd;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.q-table tbody tr {
+  transition: background 0.15s;
+}
+
+.q-table tbody tr:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* separator between question pairs */
+.q-table tbody tr.q-sep td {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.q-table td {
+  padding: 8px 14px;
+  color: rgba(232,234,246,0.88);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.q-table td.q-num {
+  width: 52px;
+  text-align: center;
+  font-weight: 700;
+  color: #a78bfa;
+  vertical-align: middle;
+  font-size: 0.82rem;
+}
+
+.q-table td.q-radio {
+  width: 36px;
+  text-align: center;
+}
+
+/* custom radio */
+.q-table input[type="radio"] {
+  width: 18px; height: 18px;
+  accent-color: #7c3aed;
+  cursor: pointer;
+}
+
+/* ── Result Table ─────────────────────────────────────────── */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table thead tr {
+  background: rgba(124, 58, 237, 0.3);
+}
+
+.result-table thead th {
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #c4b5fd;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.result-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.15s;
+}
+
+.result-table tbody tr:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.result-table td {
+  padding: 10px 16px;
+  color: rgba(232,234,246,0.88);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.result-table tr.aspect-row td {
+  font-weight: 700;
+  color: #a78bfa;
+  padding-top: 16px;
+  font-size: 0.95rem;
+  background: rgba(124,58,237,0.08);
+}
+
+.result-table td.interp {
+  color: rgba(232,234,246,0.65);
+  font-style: italic;
+  padding-left: 28px;
+  font-size: 0.85rem;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.glass-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 20px 0;
+}
+
+/* ── Utility ──────────────────────────────────────────────── */
+.text-center { text-align: center; }
+.mt-4 { margin-top: 4px; }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mb-0 { margin-bottom: 0 !important; }
+.hidden { display: none !important; }
+
+/* ── Scrollbar (Webkit) ───────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.5); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.8); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  body { padding: 12px 8px 32px; }
+  .glass-body { padding: 18px 16px; }
+  .glass-header { padding: 18px 16px; }
+  .glass-header h1 { font-size: 1.25rem; }
+  .q-table td, .q-table thead th { padding: 7px 8px; font-size: 0.82rem; }
+  .result-table td, .result-table thead th { padding: 8px 10px; }
+}
