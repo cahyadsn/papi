@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS papi_roles(
 	id TINYINT PRIMARY KEY,
 	aspect_id TINYINT,
 	code CHAR(1),
-	role VARCHAR(50)
+	role VARCHAR(50),
+	KEY idx_aspect_id (aspect_id)
 );
 INSERT INTO papi_roles(id,aspect_id,code,role)
 VALUES
@@ -149,7 +150,8 @@ CREATE TABLE IF NOT EXISTS papi_rules(
 	role_id TINYINT,
 	low_value TINYINT,
 	high_value TINYINT,
-	interprestation VARCHAR(255)
+	interprestation VARCHAR(255),
+	KEY idx_role_id (role_id)
 );
 
 INSERT INTO papi_rules(role_id,low_value,high_value,interprestation)
@@ -227,5 +229,7 @@ CREATE TABLE IF NOT EXISTS papi_results(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	user_id TINYINT,
 	role_id TINYINT,
-	value TINYINT
+	value TINYINT,
+	KEY idx_user_id (user_id),
+	KEY idx_role_id (role_id)
 );

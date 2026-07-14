@@ -1,7 +1,15 @@
-/* ============================================================
-   glass.css — Glassmorphism UI for PAPI Kostick
-   Replaces w3.css dependency
-   ============================================================ */
+/*
+================================================================================
+ *  BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
+================================================================================
+FILENAME     : css/glass.css
+AUTHOR       : CAHYA DSN
+CREATED DATE : 2026-07-12
+UPDATED DATE : 2026-07-14
+DEMO SITE    : http://psycho.cahyadsn.com/papi
+SOURCE CODE  : https://github.com/cahyadsn/papi
+================================================================================
+*/
 
 /* ── Reset & Base ─────────────────────────────────────────── */
 *, *::before, *::after {

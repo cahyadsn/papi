@@ -157,7 +157,7 @@ if (!isset($_SESSION['papiq'])) {
             <button type="button" onclick="trans(1);"  id="next" class="btn btn-primary">
               Next &rarr;
             </button>
-            <button type="submit" id="submit" class="btn btn-success hidden">
+            <button type="submit" id="submit" class="btn btn-success">
               ✔ Submit
             </button>
           </div>
@@ -176,6 +176,7 @@ if (!isset($_SESSION['papiq'])) {
   </div><!-- /glass-card -->
 </div><!-- /glass-page -->
 
-<script src="js/util.php?total_page=<?php echo $total_page; ?>"></script>
+<script>var total = <?php echo $total_page; ?>;</script>
+<script src="js/util.js"></script>
 </body>
 </html>

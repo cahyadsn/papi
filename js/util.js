@@ -1,8 +1,15 @@
-<?php
-header("Content-type: text/javascript");
-$total_page = intval($_GET['total_page'] ?? 0);
-echo "var total = {$total_page};\n";
-?>
+/*
+================================================================================
+ *  BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
+================================================================================
+FILENAME     : js/util.js
+AUTHOR       : CAHYA DSN
+CREATED DATE : 2017-04-09
+UPDATED DATE : 2026-07-14
+DEMO SITE    : http://psycho.cahyadsn.com/papi
+SOURCE CODE  : https://github.com/cahyadsn/papi
+================================================================================
+*/
 
 // Current page index (0-based)
 var p = 0;

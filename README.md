@@ -85,7 +85,7 @@ papi/
 ├── css/
 │   └── glass.css        # Glassmorphism UI stylesheet
 ├── js/
-│   └── util.php         # Client-side JS (pagination, validation, progress bar)
+│   └── util.js          # Client-side JS (pagination, validation, progress bar)
 ├── inc/
 │   ├── db.php           # Database connection (reads from .env)
 │   └── env.php          # Native PHP .env loader — no Composer required
@@ -169,6 +169,7 @@ The application relies on four main tables:
 
 | Date | Change |
 |------|--------|
+| 2026-07-14 | Performance optimization: Migrated dynamic `js/util.php` to static `js/util.js` to enable browser caching, indexed database schema keys, and optimized result matching logic to O(1) in `papi_process.php` |
 | 2026-07-12 | Added `.env`-based credential management via native PHP loader (`inc/env.php`); credentials moved out of `inc/db.php`; added `.gitignore` and `.env.example` |
 | 2026-07-12 | UI refactored — replaced W3.CSS with custom glassmorphism CSS (`css/glass.css`); rewrote `js/util.php` as clean readable JS; added XSS protection and progress bar |
 | 2025-11-26 | Bug fix in `papi_process.php` |

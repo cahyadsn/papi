@@ -58,8 +58,8 @@ SOURCE CODE  : https://github.com/cahyadsn/papi
 if (!empty($_POST['s'])) {
     include 'inc/db.php';
 
-    $result = [];
-    $data   = [];
+    $rules_by_role = [];
+    $data          = [];
 
     foreach ($_POST['s'] as $k => $v) {
         if (!isset($data[$v])) $data[$v] = 0;
@@ -75,7 +75,7 @@ if (!empty($_POST['s'])) {
 
     if ($rst = $db->query($sql)) {
         while ($obj = $rst->fetch_object()) {
-            $result[] = $obj;
+            $rules_by_role[$obj->id][] = $obj;
         }
     }
 
@@ -83,26 +83,29 @@ if (!empty($_POST['s'])) {
     $aspect = '';
 
     foreach ($data as $k => $v) {
-        foreach ($result as $out) {
-            if ($k === $out->id && $v >= $out->low_value && $v <= $out->high_value) {
-                if ($aspect !== $out->aspect) {
-                    $aspect = $out->aspect;
-                    echo "<tr class='aspect-row'>";
-                    echo "  <td>" . (++$no) . "</td>";
-                    echo "  <td colspan='3'>" . htmlspecialchars($aspect) . "</td>";
+        if (isset($rules_by_role[$k])) {
+            foreach ($rules_by_role[$k] as $out) {
+                if ($v >= $out->low_value && $v <= $out->high_value) {
+                    if ($aspect !== $out->aspect) {
+                        $aspect = $out->aspect;
+                        echo "<tr class='aspect-row'>";
+                        echo "  <td>" . (++$no) . "</td>";
+                        echo "  <td colspan='3'>" . htmlspecialchars($aspect) . "</td>";
+                        echo "</tr>";
+                    }
+                    echo "<tr>";
+                    echo "  <td></td>";
+                    echo "  <td>&nbsp;</td>";
+                    echo "  <td colspan='2'>" . htmlspecialchars($out->role) . "</td>";
                     echo "</tr>";
+                    echo "<tr>";
+                    echo "  <td></td>";
+                    echo "  <td>&nbsp;</td>";
+                    echo "  <td>&nbsp;</td>";
+                    echo "  <td class='interp'>— " . htmlspecialchars($out->interprestation) . "</td>";
+                    echo "</tr>";
+                    break; // Since low_value/high_value ranges are mutually exclusive for a given role, we can stop searching.
                 }
-                echo "<tr>";
-                echo "  <td></td>";
-                echo "  <td>&nbsp;</td>";
-                echo "  <td colspan='2'>" . htmlspecialchars($out->role) . "</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "  <td></td>";
-                echo "  <td>&nbsp;</td>";
-                echo "  <td>&nbsp;</td>";
-                echo "  <td class='interp'>— " . htmlspecialchars($out->interprestation) . "</td>";
-                echo "</tr>";
             }
         }
     }
