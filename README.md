@@ -156,8 +156,8 @@ papi/
 
 The application relies on four main tables:
 
-| Table | Description |
-|-------|-------------|
+| Table            | Description |
+|------------------|-------------|
 | `papi_questions` | The 90 question pairs (`value1`, `question1`, `value2`, `question2`) |
 | `papi_aspects` | Personality aspect categories |
 | `papi_roles` | Roles within each aspect |
@@ -167,8 +167,8 @@ The application relies on four main tables:
 
 ## Changelog
 
-| Date | Change |
-|------|--------|
+| Date       | Change |
+|------------|--------|
 | 2026-07-14 | Performance optimization: Migrated dynamic `js/util.php` to static `js/util.js` to enable browser caching, indexed database schema keys, and optimized result matching logic to O(1) in `papi_process.php` |
 | 2026-07-12 | Added `.env`-based credential management via native PHP loader (`inc/env.php`); credentials moved out of `inc/db.php`; added `.gitignore` and `.env.example` |
 | 2026-07-12 | UI refactored — replaced W3.CSS with custom glassmorphism CSS (`css/glass.css`); rewrote `js/util.php` as clean readable JS; added XSS protection and progress bar |
