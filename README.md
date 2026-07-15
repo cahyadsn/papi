@@ -22,6 +22,7 @@ Live demo: [https://psycho.cahyadsn.com/papi](https://psycho.cahyadsn.com/papi) 
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Database Schema](#database-schema)
 - [Changelog](#changelog)
 - [Roadmap](#roadmap)
@@ -66,7 +67,7 @@ The test consists of **90 forced-choice question pairs**. For each pair, respond
 
 | Layer | Technology |
 |-------|-----------|
-| Backend | PHP 7.4+ |
+| Backend | PHP 8.0+ |
 | Database | MySQL 5.7+ / MariaDB |
 | Frontend | Vanilla HTML, CSS (glassmorphism), Vanilla JS |
 | Styling | Custom `css/glass.css` (replaces W3.CSS) |
@@ -88,9 +89,16 @@ papi/
 │   └── util.js          # Client-side JS (pagination, validation, progress bar)
 ├── inc/
 │   ├── db.php           # Database connection (reads from .env)
-│   └── env.php          # Native PHP .env loader — no Composer required
+│   ├── env.php          # Native PHP .env loader — no Composer required
+│   └── score.php        # Pure scoring functions (aggregate, rule-match, build results)
 ├── db/
 │   └── papi.sql         # Database schema and seed data (dummy)
+├── tests/
+│   ├── README.md        # Test suite documentation
+│   ├── run.php          # CLI entry point — runs all test files
+│   ├── TestRunner.php   # Minimal native-PHP assertion and reporting framework
+│   ├── EnvTest.php      # Tests for inc/env.php  (load_env, env)
+│   └── ScoreTest.php    # Tests for inc/score.php (aggregate_scores, find_rule, build_results)
 └── README.md
 ```
 
@@ -152,6 +160,29 @@ papi/
 
 ---
 
+## Testing
+
+The project includes a native PHP unit test suite that requires no Composer or external frameworks.
+
+**Run all tests** from the project root:
+
+```bash
+php tests/run.php
+```
+
+| Suite | File | Tests | Covers |
+|---|---|---|---|
+| `load_env()` | `tests/EnvTest.php` | 10 | Parsing, quoting, comments, blank lines, no-overwrite guard |
+| `env()` | `tests/EnvTest.php` | 12 | Default fallback, bool/null casting, `getenv()` fallback |
+| `aggregate_scores()` | `tests/ScoreTest.php` | 7 | Answer tallying, sort order, type casting, 90-answer simulation |
+| `find_rule()` | `tests/ScoreTest.php` | 11 | Band matching, boundary values, unknown role/score handling |
+| `build_results()` | `tests/ScoreTest.php` | 8 | Result assembly, skipped roles, full pipeline integration |
+| **Total** | | **48** | |
+
+Exit code `0` = all passed, `1` = one or more failed. See [`tests/README.md`](tests/README.md) for full documentation.
+
+---
+
 ## Database Schema
 
 The application relies on four main tables:
@@ -169,6 +200,7 @@ The application relies on four main tables:
 
 | Date       | Change |
 |------------|--------|
+| 2026-07-15 | Added native PHP unit test suite (`tests/`): `TestRunner.php` (assertion framework), `EnvTest.php` (22 tests), `ScoreTest.php` (26 tests), `run.php` (CLI entry point); extracted pure scoring logic into `inc/score.php` |
 | 2026-07-14 | Performance optimization: Migrated dynamic `js/util.php` to static `js/util.js` to enable browser caching, indexed database schema keys, and optimized result matching logic to O(1) in `papi_process.php` |
 | 2026-07-12 | Added `.env`-based credential management via native PHP loader (`inc/env.php`); credentials moved out of `inc/db.php`; added `.gitignore` and `.env.example` |
 | 2026-07-12 | UI refactored — replaced W3.CSS with custom glassmorphism CSS (`css/glass.css`); rewrote `js/util.php` as clean readable JS; added XSS protection and progress bar |
