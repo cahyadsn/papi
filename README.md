@@ -200,6 +200,7 @@ The application relies on four main tables:
 
 | Date       | Change |
 |------------|--------|
+| 2026-07-21 | Refactored `papi_process.php` to import and utilize pure scoring functions (`aggregate_scores`, `build_results`) from `inc/score.php`, resolving code duplication and architectural drift. |
 | 2026-07-15 | Added native PHP unit test suite (`tests/`): `TestRunner.php` (assertion framework), `EnvTest.php` (22 tests), `ScoreTest.php` (26 tests), `run.php` (CLI entry point); extracted pure scoring logic into `inc/score.php` |
 | 2026-07-14 | Performance optimization: Migrated dynamic `js/util.php` to static `js/util.js` to enable browser caching, indexed database schema keys, and optimized result matching logic to O(1) in `papi_process.php` |
 | 2026-07-12 | Added `.env`-based credential management via native PHP loader (`inc/env.php`); credentials moved out of `inc/db.php`; added `.gitignore` and `.env.example` |

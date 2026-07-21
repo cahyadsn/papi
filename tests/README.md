@@ -301,7 +301,7 @@ Open `tests/TestRunner.php` and add a new `public function assertXxx(...)` metho
 
 **No Composer / no PHPUnit** — the project explicitly has no Composer dependency. The test runner is self-contained in a single ~200-line file.
 
-**`inc/score.php` extraction** — `papi_process.php` mixes scoring logic with HTML output, making it untestable directly. The pure logic was extracted into `inc/score.php` with no side effects. `papi_process.php` can `require` this file to reuse the same functions.
+**`inc/score.php` extraction** — `papi_process.php` mixed scoring logic with HTML output, making it untestable directly. The pure logic was extracted into `inc/score.php` with no side effects. `papi_process.php` has been refactored to require and reuse these functions, resolving code duplication and ensuring architectural integrity.
 
 **Temp files for `.env` tests** — `load_env()` reads from disk. Rather than mocking the filesystem, tests write real temp files via `tempnam()` and `file_put_contents()`, then delete them with `unlink()`. This keeps tests realistic while remaining fully isolated.
 

@@ -57,15 +57,10 @@ SOURCE CODE  : https://github.com/cahyadsn/papi
 <?php
 if (!empty($_POST['s'])) {
     include 'inc/db.php';
+    require_once 'inc/score.php';
 
     $rules_by_role = [];
-    $data          = [];
-
-    foreach ($_POST['s'] as $k => $v) {
-        if (!isset($data[$v])) $data[$v] = 0;
-        $data[$v]++;
-    }
-    ksort($data);
+    $data = aggregate_scores($_POST['s']);
 
     $sql = "SELECT b.id, a.low_value, a.high_value,
                    c.aspect, b.role, a.interprestation
@@ -79,35 +74,29 @@ if (!empty($_POST['s'])) {
         }
     }
 
-    $no     = 0;
-    $aspect = '';
+    $results = build_results($data, $rules_by_role);
+    $no      = 0;
+    $aspect  = '';
 
-    foreach ($data as $k => $v) {
-        if (isset($rules_by_role[$k])) {
-            foreach ($rules_by_role[$k] as $out) {
-                if ($v >= $out->low_value && $v <= $out->high_value) {
-                    if ($aspect !== $out->aspect) {
-                        $aspect = $out->aspect;
-                        echo "<tr class='aspect-row'>";
-                        echo "  <td>" . (++$no) . "</td>";
-                        echo "  <td colspan='3'>" . htmlspecialchars($aspect) . "</td>";
-                        echo "</tr>";
-                    }
-                    echo "<tr>";
-                    echo "  <td></td>";
-                    echo "  <td>&nbsp;</td>";
-                    echo "  <td colspan='2'>" . htmlspecialchars($out->role) . "</td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                    echo "  <td></td>";
-                    echo "  <td>&nbsp;</td>";
-                    echo "  <td>&nbsp;</td>";
-                    echo "  <td class='interp'>— " . htmlspecialchars($out->interprestation) . "</td>";
-                    echo "</tr>";
-                    break; // Since low_value/high_value ranges are mutually exclusive for a given role, we can stop searching.
-                }
-            }
+    foreach ($results as $row) {
+        if ($aspect !== $row['aspect']) {
+            $aspect = $row['aspect'];
+            echo "<tr class='aspect-row'>";
+            echo "  <td>" . (++$no) . "</td>";
+            echo "  <td colspan='3'>" . htmlspecialchars($aspect) . "</td>";
+            echo "</tr>";
         }
+        echo "<tr>";
+        echo "  <td></td>";
+        echo "  <td>&nbsp;</td>";
+        echo "  <td colspan='2'>" . htmlspecialchars($row['role']) . "</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "  <td></td>";
+        echo "  <td>&nbsp;</td>";
+        echo "  <td>&nbsp;</td>";
+        echo "  <td class='interp'>— " . htmlspecialchars($row['interprestation']) . "</td>";
+        echo "</tr>";
     }
 }
 ?>
